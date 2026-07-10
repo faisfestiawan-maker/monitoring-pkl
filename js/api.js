@@ -3,7 +3,7 @@
 // ================================================
 
 // Ganti dengan URL Web App Apps Script setelah deploy
-const API_URL = "PASTE_URL_WEB_APP_DISINI";
+const API_URL = "https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
 
 
 // ================================================
