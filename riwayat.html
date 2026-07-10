@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Riwayat Presensi PKL</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <img src="assets/logo.png" class="sidebar-logo">
+
+            <h2>PKL</h2>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html" class="menu">
+
+                Dashboard
+
+            </a>
+
+            <a href="riwayat.html" class="menu active">
+
+                Riwayat
+
+            </a>
+
+        </nav>
+
+        <button id="btnLogout" class="logout">
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <!-- ========================= -->
+    <!-- CONTENT -->
+    <!-- ========================= -->
+
+    <main class="content">
+
+        <header class="header">
+
+            <div>
+
+                <h1>Riwayat Presensi PKL</h1>
+
+                <p id="welcomeUser">
+
+                    Riwayat Kehadiran
+
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ========================= -->
+        <!-- FILTER -->
+        <!-- ========================= -->
+
+        <section class="toolbar">
+
+            <div>
+
+                <label>Tanggal Awal</label>
+
+                <input
+                    type="date"
+                    id="tglAwal">
+
+            </div>
+
+            <div>
+
+                <label>Tanggal Akhir</label>
+
+                <input
+                    type="date"
+                    id="tglAkhir">
+
+            </div>
+
+            <div>
+
+                <button
+                    id="btnFilter"
+                    class="primary">
+
+                    Tampilkan
+
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- TABLE -->
+        <!-- ========================= -->
+
+        <section class="table-card">
+
+            <div class="table-responsive">
+
+                <table id="tblRiwayat">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+                            <th>Tanggal</th>
+                            <th>Jam</th>
+                            <th>NIS</th>
+                            <th>Nama</th>
+                            <th>Kelas</th>
+                            <th>Tempat PKL</th>
+                            <th>Status</th>
+                            <th>Foto</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- MODAL FOTO -->
+<!-- ========================= -->
+
+<div id="modalFoto" class="modal">
+
+    <div class="modal-content">
+
+        <span id="closeModal">
+
+            &times;
+
+        </span>
+
+        <img
+            id="previewFoto">
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- LOADING -->
+<!-- ========================= -->
+
+<div
+    id="loading"
+    class="loading"
+    style="display:none;">
+
+    <div class="spinner"></div>
+
+    <p>Memuat data...</p>
+
+</div>
+
+
+
+<script src="js/api.js"></script>
+<script src="js/riwayat.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard Monitoring PKL</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- ========================= -->
+    <!-- SIDEBAR -->
+    <!-- ========================= -->
+
+    <aside class="sidebar">
+
+        <div class="sidebar-header">
+
+            <img src="assets/logo.png" class="sidebar-logo">
+
+            <h2>PKL</h2>
+
+        </div>
+
+        <nav>
+
+            <a href="dashboard.html"
+               class="menu active">
+
+                Dashboard
+
+            </a>
+
+            <a href="riwayat.html"
+               class="menu">
+
+                Riwayat
+
+            </a>
+
+        </nav>
+
+        <button id="btnLogout"
+                class="logout">
+
+            Logout
+
+        </button>
+
+    </aside>
+
+
+
+    <!-- ========================= -->
+    <!-- CONTENT -->
+    <!-- ========================= -->
+
+    <main class="content">
+
+        <!-- HEADER -->
+
+        <header class="header">
+
+            <div>
+
+                <h1>Monitoring Kehadiran PKL</h1>
+
+                <p id="welcomeUser">
+
+                    Selamat datang
+
+                </p>
+
+            </div>
+
+        </header>
+
+
+
+        <!-- ========================= -->
+        <!-- CARD -->
+        <!-- ========================= -->
+
+        <section class="cards">
+
+            <div class="card">
+
+                <h3>Total</h3>
+
+                <span id="total">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="card hadir">
+
+                <h3>Hadir</h3>
+
+                <span id="hadir">
+
+                    0
+
+                </span>
+
+            </div>
+
+            <div class="card belum">
+
+                <h3>Belum</h3>
+
+                <span id="belum">
+
+                    0
+
+                </span>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- FILTER -->
+        <!-- ========================= -->
+
+        <section class="toolbar">
+
+            <div>
+
+                <label>Tanggal</label>
+
+                <input
+                    type="date"
+                    id="tanggal">
+
+            </div>
+
+            <div>
+
+                <label>Cari Nama</label>
+
+                <input
+                    type="text"
+                    id="search"
+                    placeholder="Cari siswa...">
+
+            </div>
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- TABLE -->
+        <!-- ========================= -->
+
+        <section class="table-card">
+
+            <div class="table-responsive">
+
+                <table id="tblMonitoring">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>No</th>
+
+                            <th>NIS</th>
+
+                            <th>Nama</th>
+
+                            <th>Kelas</th>
+
+                            <th>Tempat PKL</th>
+
+                            <th>Guru</th>
+
+                            <th>Jam</th>
+
+                            <th>Status</th>
+
+                            <th>Foto</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- MODAL FOTO -->
+<!-- ========================= -->
+
+<div id="modalFoto"
+     class="modal">
+
+    <div class="modal-content">
+
+        <span id="closeModal">
+
+            &times;
+
+        </span>
+
+        <img
+            id="previewFoto">
+
+    </div>
+
+</div>
+
+
+
+<!-- ========================= -->
+<!-- LOADING -->
+<!-- ========================= -->
+
+<div id="loading"
+     class="loading"
+     style="display:none;">
+
+    <div class="spinner"></div>
+
+    <p>Memuat data...</p>
+
+</div>
+
+
+
+<script src="js/api.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>

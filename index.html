@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Monitoring PKL</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <img src="assets/logo.png" class="logo">
+
+        <h1>Monitoring Kehadiran PKL</h1>
+
+        <p>
+            Jurusan Teknik Elektronika
+            <br>
+            SMKN 1 Glagah
+        </p>
+
+        <div class="tab-container">
+
+            <button
+                class="tab active"
+                id="tabGuru">
+                Guru / Kajur
+            </button>
+
+            <button
+                class="tab"
+                id="tabOrtu">
+                Orang Tua
+            </button>
+
+        </div>
+
+        <!-- ============================= -->
+        <!-- LOGIN GURU -->
+        <!-- ============================= -->
+
+        <div id="guruForm">
+
+            <label>Email</label>
+
+            <input
+                type="email"
+                id="emailGuru"
+                placeholder="nama@smkn1glagah.sch.id">
+
+            <button id="btnLoginGuru">
+
+                Login
+
+            </button>
+
+        </div>
+
+        <!-- ============================= -->
+        <!-- LOGIN ORTU -->
+        <!-- ============================= -->
+
+        <div
+            id="ortuForm"
+            style="display:none;">
+
+            <label>NIS</label>
+
+            <input
+                type="text"
+                id="nis"
+                placeholder="Masukkan NIS">
+
+            <button id="btnLoginOrtu">
+
+                Login
+
+            </button>
+
+        </div>
+
+        <div
+            id="loading"
+            class="loading"
+            style="display:none;">
+
+            <div class="spinner"></div>
+
+            <span>Memproses...</span>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/login.js"></script>
+
+</body>
+</html>
