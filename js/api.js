@@ -2,27 +2,23 @@
 // API CONFIGURATION
 // ================================================
 
-// Ganti dengan URL Web App Apps Script setelah deploy
-const API_URL = "https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
+const API_URL =
+"https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
 
 
 // ================================================
-// POST REQUEST
+// GET REQUEST
 // ================================================
 
-async function postAPI(data){
+async function getAPI(params){
 
     try{
 
-        const response = await fetch(API_URL,{
+        const query = new URLSearchParams(params);
 
-            method:"POST",
-
-            mode:"no-cors",
-
-            body:JSON.stringify(data)
-
-        });
+        const response = await fetch(
+            API_URL + "?" + query.toString()
+        );
 
         if(!response.ok){
 
@@ -32,7 +28,11 @@ async function postAPI(data){
 
         }
 
-        return await response.json();
+        const result = await response.json();
+
+        console.log("API RESULT :", result);
+
+        return result;
 
     }catch(err){
 
@@ -51,7 +51,7 @@ async function postAPI(data){
 
 async function loginGuru(email){
 
-    return await postAPI({
+    return await getAPI({
 
         action:"loginGuru",
 
@@ -68,7 +68,7 @@ async function loginGuru(email){
 
 async function loginOrtu(nis){
 
-    return await postAPI({
+    return await getAPI({
 
         action:"loginOrtu",
 
@@ -85,13 +85,17 @@ async function loginOrtu(nis){
 
 async function getDashboard(user,tanggal){
 
-    return await postAPI({
+    return await getAPI({
 
         action:"dashboard",
 
-        user:user,
+        tanggal:tanggal,
 
-        tanggal:tanggal
+        role:user.role,
+
+        nama:user.nama || "",
+
+        nis:user.nis || ""
 
     });
 
@@ -104,15 +108,19 @@ async function getDashboard(user,tanggal){
 
 async function getRiwayat(user,tanggalAwal,tanggalAkhir){
 
-    return await postAPI({
+    return await getAPI({
 
         action:"riwayat",
 
-        user:user,
-
         tanggalAwal:tanggalAwal,
 
-        tanggalAkhir:tanggalAkhir
+        tanggalAkhir:tanggalAkhir,
+
+        role:user.role,
+
+        nama:user.nama || "",
+
+        nis:user.nis || ""
 
     });
 
@@ -125,7 +133,7 @@ async function getRiwayat(user,tanggalAwal,tanggalAkhir){
 
 async function getDetail(nis,tanggal){
 
-    return await postAPI({
+    return await getAPI({
 
         action:"detail",
 
