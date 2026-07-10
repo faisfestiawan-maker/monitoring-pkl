@@ -4,11 +4,14 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Riwayat Presensi PKL</title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1">
 
-    <link rel="stylesheet" href="css/style.css">
+    <title>Riwayat Presensi</title>
+
+    <link rel="stylesheet"
+          href="css/style.css">
 
 </head>
 
@@ -16,37 +19,52 @@
 
 <div class="container">
 
-    <!-- ========================= -->
-    <!-- SIDEBAR -->
-    <!-- ========================= -->
-
     <aside class="sidebar">
 
-        <div class="sidebar-header">
+        <div>
 
-            <img src="assets/logo.png" class="sidebar-logo">
+            <div class="sidebar-header">
 
-            <h2>PKL</h2>
+                <img src="assets/logo.png"
+                     class="sidebar-logo">
+
+                <h2>Monitoring PKL</h2>
+
+            </div>
+
+            <div class="user-box">
+
+                <h3 id="namaUser"></h3>
+
+                <p id="roleUser"></p>
+
+            </div>
+
+            <nav>
+
+                <a
+                    href="dashboard.html"
+                    class="menu">
+
+                    🏠 Dashboard
+
+                </a>
+
+                <a
+                    href="riwayat.html"
+                    class="menu active">
+
+                    📋 Riwayat Presensi
+
+                </a>
+
+            </nav>
 
         </div>
 
-        <nav>
-
-            <a href="dashboard.html" class="menu">
-
-                Dashboard
-
-            </a>
-
-            <a href="riwayat.html" class="menu active">
-
-                Riwayat
-
-            </a>
-
-        </nav>
-
-        <button id="btnLogout" class="logout">
+        <button
+            id="btnLogout"
+            class="logout">
 
             Logout
 
@@ -55,34 +73,19 @@
     </aside>
 
 
-
-    <!-- ========================= -->
-    <!-- CONTENT -->
-    <!-- ========================= -->
-
     <main class="content">
 
-        <header class="header">
+        <div class="header">
 
             <div>
 
-                <h1>Riwayat Presensi PKL</h1>
+                <h1>Riwayat Presensi</h1>
 
-                <p id="welcomeUser">
-
-                    Riwayat Kehadiran
-
-                </p>
+                <p>Monitoring PKL Jurusan Teknik Elektronika</p>
 
             </div>
 
-        </header>
-
-
-
-        <!-- ========================= -->
-        <!-- FILTER -->
-        <!-- ========================= -->
+        </div>
 
         <section class="toolbar">
 
@@ -109,8 +112,8 @@
             <div>
 
                 <button
-                    id="btnFilter"
-                    class="primary">
+                    class="primary"
+                    id="btnCari">
 
                     Tampilkan
 
@@ -119,12 +122,6 @@
             </div>
 
         </section>
-
-
-
-        <!-- ========================= -->
-        <!-- TABLE -->
-        <!-- ========================= -->
 
         <section class="table-card">
 
@@ -165,12 +162,9 @@
 </div>
 
 
-
-<!-- ========================= -->
-<!-- MODAL FOTO -->
-<!-- ========================= -->
-
-<div id="modalFoto" class="modal">
+<div
+    class="modal"
+    id="modal">
 
     <div class="modal-content">
 
@@ -188,23 +182,16 @@
 </div>
 
 
-
-<!-- ========================= -->
-<!-- LOADING -->
-<!-- ========================= -->
-
 <div
-    id="loading"
     class="loading"
+    id="loading"
     style="display:none;">
 
     <div class="spinner"></div>
 
-    <p>Memuat data...</p>
+    <h3>Memuat...</h3>
 
 </div>
-
-
 
 <script src="js/api.js"></script>
 <script src="js/riwayat.js"></script>

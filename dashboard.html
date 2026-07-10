@@ -4,7 +4,9 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
     <title>Dashboard Monitoring PKL</title>
 
@@ -16,40 +18,54 @@
 
 <div class="container">
 
-    <!-- ========================= -->
-    <!-- SIDEBAR -->
-    <!-- ========================= -->
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
 
     <aside class="sidebar">
 
-        <div class="sidebar-header">
+        <div>
 
-            <img src="assets/logo.png" class="sidebar-logo">
+            <div class="sidebar-header">
 
-            <h2>PKL</h2>
+                <img src="assets/logo.png"
+                     class="sidebar-logo">
+
+                <h2>Monitoring PKL</h2>
+
+            </div>
+
+            <div class="user-box">
+
+                <h3 id="namaUser">-</h3>
+
+                <p id="roleUser">-</p>
+
+            </div>
+
+            <nav>
+
+                <a href="dashboard.html"
+                   class="menu active">
+
+                    🏠 Dashboard
+
+                </a>
+
+                <a href="riwayat.html"
+                   class="menu">
+
+                    📋 Riwayat Presensi
+
+                </a>
+
+            </nav>
 
         </div>
 
-        <nav>
-
-            <a href="dashboard.html"
-               class="menu active">
-
-                Dashboard
-
-            </a>
-
-            <a href="riwayat.html"
-               class="menu">
-
-                Riwayat
-
-            </a>
-
-        </nav>
-
-        <button id="btnLogout"
-                class="logout">
+        <button
+            id="btnLogout"
+            class="logout">
 
             Logout
 
@@ -57,83 +73,67 @@
 
     </aside>
 
-
-
-    <!-- ========================= -->
-    <!-- CONTENT -->
-    <!-- ========================= -->
+    <!-- =========================
+         CONTENT
+    ========================== -->
 
     <main class="content">
 
-        <!-- HEADER -->
-
-        <header class="header">
+        <div class="header">
 
             <div>
 
                 <h1>Monitoring Kehadiran PKL</h1>
 
-                <p id="welcomeUser">
-
-                    Selamat datang
-
-                </p>
+                <p>Jurusan Teknik Elektronika SMKN 1 Glagah</p>
 
             </div>
 
-        </header>
+        </div>
 
-
-
-        <!-- ========================= -->
-        <!-- CARD -->
-        <!-- ========================= -->
+        <!-- =========================
+             CARD
+        ========================== -->
 
         <section class="cards">
 
             <div class="card">
 
-                <h3>Total</h3>
+                <h3>Total Siswa</h3>
 
-                <span id="total">
-
-                    0
-
-                </span>
+                <span id="total">0</span>
 
             </div>
 
             <div class="card hadir">
 
-                <h3>Hadir</h3>
+                <h3>Sudah Presensi</h3>
 
-                <span id="hadir">
-
-                    0
-
-                </span>
+                <span id="hadir">0</span>
 
             </div>
 
             <div class="card belum">
 
-                <h3>Belum</h3>
+                <h3>Belum Presensi</h3>
 
-                <span id="belum">
+                <span id="belum">0</span>
 
-                    0
+            </div>
 
-                </span>
+            <div class="card">
+
+                <h3>Persentase</h3>
+
+                <span id="persen">0%</span>
 
             </div>
 
         </section>
 
-
-
-        <!-- ========================= -->
-        <!-- FILTER -->
-        <!-- ========================= -->
+        <!-- =========================
+             TOOLBAR
+        ========================== -->
 
         <section class="toolbar">
 
@@ -154,17 +154,15 @@
                 <input
                     type="text"
                     id="search"
-                    placeholder="Cari siswa...">
+                    placeholder="Ketik nama siswa...">
 
             </div>
 
         </section>
 
-
-
-        <!-- ========================= -->
-        <!-- TABLE -->
-        <!-- ========================= -->
+        <!-- =========================
+             TABLE
+        ========================== -->
 
         <section class="table-card">
 
@@ -212,14 +210,13 @@
 
 </div>
 
+<!-- =========================
+     MODAL FOTO
+========================== -->
 
-
-<!-- ========================= -->
-<!-- MODAL FOTO -->
-<!-- ========================= -->
-
-<div id="modalFoto"
-     class="modal">
+<div
+    class="modal"
+    id="modal">
 
     <div class="modal-content">
 
@@ -230,31 +227,30 @@
         </span>
 
         <img
-            id="previewFoto">
+            id="previewFoto"
+            src="">
 
     </div>
 
 </div>
 
+<!-- =========================
+     LOADING
+========================== -->
 
-
-<!-- ========================= -->
-<!-- LOADING -->
-<!-- ========================= -->
-
-<div id="loading"
-     class="loading"
-     style="display:none;">
+<div
+    class="loading"
+    id="loading"
+    style="display:none;">
 
     <div class="spinner"></div>
 
-    <p>Memuat data...</p>
+    <h3>Memuat data...</h3>
 
 </div>
 
-
-
 <script src="js/api.js"></script>
+
 <script src="js/dashboard.js"></script>
 
 </body>
