@@ -229,16 +229,21 @@ async function lihatFoto(nis){
 
     try{
 
-        const data = await getDetail(
+        const res = await getDetail(
             nis,
             currentTanggal
         );
 
-        if(!data)return;
+        if(!res.success){
+
+            alert(res.message);
+            return;
+
+        }
 
         document
             .getElementById("previewFoto")
-            .src = data.foto;
+            .src = res.data.foto;
 
         document
             .getElementById("modal")

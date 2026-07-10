@@ -138,15 +138,28 @@ Lihat
 
 
 
-async function lihatFoto(nis,tanggal){
+async function lihatFoto(nis, tanggal){
 
-    const data=await getDetail(nis,tanggal);
+    try{
 
-    if(!data)return;
+        const res = await getDetail(nis, tanggal);
 
-    document.getElementById("previewFoto").src=data.foto;
+        if(!res.success){
 
-    document.getElementById("modal").style.display="flex";
+            alert(res.message);
+            return;
+
+        }
+
+        document.getElementById("previewFoto").src = res.data.foto;
+
+        document.getElementById("modal").style.display = "flex";
+
+    }catch(err){
+
+        alert(err.message);
+
+    }
 
 }
 
