@@ -156,13 +156,13 @@ function updateSummary(summary){
 // TABLE
 // ======================================================
 
-function renderTable(rows){
+function renderTable(){
 
     const tbody = document.querySelector("#tblMonitoring tbody");
 
     tbody.innerHTML = "";
 
-    rows.forEach((item,index)=>{
+    dataDashboard.forEach((item,index)=>{
 
         const statusClass =
             item.status==="HADIR"
@@ -203,7 +203,7 @@ item.foto
 
 `<button
 class="btn-foto"
-onclick="lihatFoto('${item.nis}')">
+onclick="lihatFoto('${item.nis}','${item.tanggal}')">
 
 Lihat
 
@@ -242,7 +242,7 @@ function filterNama(){
 
     );
 
-    renderTable(hasil);
+    renderTable();
 
 }
 
