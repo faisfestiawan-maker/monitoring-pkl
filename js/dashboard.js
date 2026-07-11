@@ -250,28 +250,37 @@ function filterNama(){
 // FOTO
 // ======================================================
 
-async function lihatFoto(nis,tanggal){
+async function lihatFoto(nis){
 
     try{
 
-        const res = await getDetail(nis,tanggal);
+        const res = await getDetail(
+            nis,
+            currentTanggal
+        );
 
+        console.log("HASIL API");
         console.log(res);
 
-        if(!res.success){
+        console.log("DATA");
+        console.log(res.data);
 
+        console.log("FOTO");
+        console.log(res.data?.foto);
+
+        if(!res.success){
             alert(res.message);
             return;
-
         }
 
-        document.getElementById("previewFoto").src = res.foto;
+        document.getElementById("previewFoto").src =
+            res.data.foto;
 
-        document.getElementById("modal").style.display = "flex";
+        document.getElementById("modal").style.display="flex";
 
     }catch(err){
 
-        alert(err.message);
+        console.log(err);
 
     }
 
