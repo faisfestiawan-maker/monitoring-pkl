@@ -28,9 +28,18 @@ module.exports = (req, res) => {
     let gasUrl = GAS_URL;
     let gasBody = null;
 
-    if (req.method === 'POST') {
-      gasBody = JSON.stringify(req.body);
-      gasUrl = GAS_URL; // POST to GAS
+    if(req.method!=="POST"){
+
+        res.status(405).json({
+
+            success:false,
+
+            message:"Method not allowed"
+
+        });
+
+        return;
+
     } else {
       // GET request - add query params
       const query = new URLSearchParams(req.query);

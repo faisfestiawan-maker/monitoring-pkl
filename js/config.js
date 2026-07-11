@@ -54,7 +54,7 @@ Ganti PROXY_URL di bawah sesuai pilihan setup Anda
 // ================================================
 
 // Option 1: Vercel Proxy (RECOMMENDED)
-const PROXY_URL = "https://monitoring-pkl.vercel.app";
+const PROXY_URL = "https://monitoring-pkl.vercel.app/api/proxy";
 
 // Option 2: Local/Development
 // const PROXY_URL = "http://localhost:3000/api/proxy";
@@ -66,24 +66,23 @@ const PROXY_URL = "https://monitoring-pkl.vercel.app";
 // AUTO SELECT
 // ================================================
 
-function getAPIURL() {
-  
-  // Jika sedang di localhost, gunakan local proxy
-  if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    return "http://localhost:3000/api/proxy";
-  }
-  
-  // Jika PROXY_URL sudah dikonfigurasi, gunakan itu
-  if (PROXY_URL && PROXY_URL !== "https://monitoring-pkl.vercel.app/") {
+function getAPIURL(){
+
+    if(
+        window.location.hostname==="localhost" ||
+        window.location.hostname==="127.0.0.1"
+    ){
+
+        return "http://localhost:3000/api/proxy";
+
+    }
+
     return PROXY_URL;
-  }
-  
-  // Fallback (akan error - perlu dikonfigurasi)
-  console.warn("API_URL belum dikonfigurasi. Update PROXY_URL di config.js");
-  return PROXY_URL;
+
 }
 
-const API_URL = getAPIURL();
+const API_URL=getAPIURL();
+
 
 // Verify configuration
 if (API_URL.includes('YOUR_VERCEL')) {
