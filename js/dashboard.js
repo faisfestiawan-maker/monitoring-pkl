@@ -250,14 +250,13 @@ function filterNama(){
 // FOTO
 // ======================================================
 
-async function lihatFoto(nis){
+async function lihatFoto(nis,tanggal){
 
     try{
 
-        const res = await getDetail(
-            nis,
-            currentTanggal
-        );
+        const res = await getDetail(nis,tanggal);
+
+        console.log(res);
 
         if(!res.success){
 
@@ -266,13 +265,9 @@ async function lihatFoto(nis){
 
         }
 
-        document
-            .getElementById("previewFoto")
-            .src = res.data.foto;
+        document.getElementById("previewFoto").src = res.foto;
 
-        document
-            .getElementById("modal")
-            .style.display = "flex";
+        document.getElementById("modal").style.display = "flex";
 
     }catch(err){
 
