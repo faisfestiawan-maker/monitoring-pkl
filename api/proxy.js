@@ -1,105 +1,98 @@
-const https = require("https");
+// ======================================================
+// VERCEL PROXY
+// ======================================================
 
-// URL Web App Apps Script
-const GAS_URL = "https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
+const GAS_URL =
+"https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
 
-module.exports = (req, res) => {
-
-    console.log("===== REQUEST MASUK =====");
-    console.log("Method :", req.method);
-    console.log("Body :", req.body);
-
-    // ============================
-    // CORS
-    // ============================
+module.exports = async (req, res) => {
 
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-    if (req.method === "OPTIONS") {
+    if(req.method==="OPTIONS"){
+
         return res.status(200).end();
+
     }
 
-    if (req.method !== "POST") {
+    if(req.method!=="POST"){
+
         return res.status(405).json({
-            success: false,
-            message: "Method not allowed"
+
+            success:false,
+
+            message:"Method not allowed"
+
         });
+
     }
 
-    // ============================
-    // BODY
-    // ============================
+    try{
 
-    const body =
-        typeof req.body === "string"
-            ? req.body
-            : JSON.stringify(req.body || {});
+        console.log("===== REQUEST =====");
+        console.log(req.body);
 
-    // ============================
-    // REQUEST KE APPS SCRIPT
-    // ============================
-        console.log("===== KIRIM KE GAS =====");
-        console.log("URL :", GAS_URL);
-        console.log("BODY :", body);
-    const gasReq = https.request(
-        GAS_URL,
-        {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                "Content-Length": Buffer.byteLength(body)
+        const response = await fetch(
+
+            GAS_URL,
+
+            {
+
+                method:"POST",
+
+                headers:{
+
+                    "Content-Type":"application/json"
+
+                },
+
+                body:JSON.stringify(req.body),
+
+                redirect:"follow"
+
             }
-        },
-        (gasRes) => {
 
-            let result = "";
+        );
 
-            gasRes.on("data", chunk => {
-                result += chunk;
-            });
+        const text = await response.text();
 
-            gasRes.on("end", () => {
+        console.log("===== RESPONSE GAS =====");
+        console.log(text);
 
-                console.log("===== RESPONSE GAS =====");
-                console.log(result);
+        try{
 
-                try{
+            const json = JSON.parse(text);
 
-                    res.status(200).json(JSON.parse(result));
+            return res.status(200).json(json);
 
-                }catch(err){
+        }catch(err){
 
-                    console.log("JSON ERROR :", err);
+            return res.status(500).json({
 
-                    res.status(500).json({
-                        success:false,
-                        message:"Invalid JSON",
-                        raw:result
-                    });
+                success:false,
 
-                }
+                message:"Apps Script tidak mengembalikan JSON",
+
+                raw:text
 
             });
 
         }
-    );
 
-    gasReq.on("error", err => {
+    }catch(err){
 
-        res.status(500).json({
+        console.error(err);
+
+        return res.status(500).json({
 
             success:false,
 
-            message:err.message
+            message:err.toString()
 
         });
 
-    });
-
-    gasReq.write(body);
-
-    gasReq.end();
+    }
 
 };
