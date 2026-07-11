@@ -74,7 +74,7 @@ function getAPIURL() {
   }
   
   // Jika PROXY_URL sudah dikonfigurasi, gunakan itu
-  if (PROXY_URL && PROXY_URL !== "https://YOUR_VERCEL_PROJECT.vercel.app/api/proxy") {
+  if (PROXY_URL && PROXY_URL !== "https://monitoring-pkl.vercel.app/api/proxy") {
     return PROXY_URL;
   }
   
