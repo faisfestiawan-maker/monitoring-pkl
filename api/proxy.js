@@ -5,6 +5,10 @@ const GAS_URL = "https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmO
 
 module.exports = (req, res) => {
 
+    console.log("===== REQUEST MASUK =====");
+    console.log("Method :", req.method);
+    console.log("Body :", req.body);
+
     // ============================
     // CORS
     // ============================
@@ -36,7 +40,9 @@ module.exports = (req, res) => {
     // ============================
     // REQUEST KE APPS SCRIPT
     // ============================
-
+        console.log("===== KIRIM KE GAS =====");
+        console.log("URL :", GAS_URL);
+        console.log("BODY :", body);
     const gasReq = https.request(
         GAS_URL,
         {
@@ -56,22 +62,21 @@ module.exports = (req, res) => {
 
             gasRes.on("end", () => {
 
+                console.log("===== RESPONSE GAS =====");
+                console.log(result);
+
                 try{
 
-                    res.status(200).json(
-                        JSON.parse(result)
-                    );
+                    res.status(200).json(JSON.parse(result));
 
                 }catch(err){
 
+                    console.log("JSON ERROR :", err);
+
                     res.status(500).json({
-
                         success:false,
-
-                        message:"Response Apps Script tidak valid.",
-
+                        message:"Invalid JSON",
                         raw:result
-
                     });
 
                 }
