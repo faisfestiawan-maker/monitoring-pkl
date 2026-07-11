@@ -54,7 +54,7 @@ Ganti PROXY_URL di bawah sesuai pilihan setup Anda
 // ================================================
 
 // Option 1: Vercel Proxy (RECOMMENDED)
-const PROXY_URL = "https://YOUR_VERCEL_PROJECT.vercel.app/api/proxy";
+const PROXY_URL = "https://monitoring-pkl.vercel.app";
 
 // Option 2: Local/Development
 // const PROXY_URL = "http://localhost:3000/api/proxy";
