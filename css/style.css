@@ -1014,3 +1014,48 @@ tbody tr:hover{
     }
 
 }
+
+
+.toolbar{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:15px;
+
+    margin-bottom:20px;
+
+}
+
+.filter-item{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.filter-item label{
+
+    margin-bottom:6px;
+
+    font-weight:600;
+
+}
+
+.filter-item input,
+.filter-item select{
+
+    height:42px;
+
+    border:1px solid #ddd;
+
+    border-radius:8px;
+
+    padding:0 12px;
+
+    font-size:15px;
+
+}

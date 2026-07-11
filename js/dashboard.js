@@ -3,6 +3,7 @@
 // ======================================================
 
 let dashboardData = null;
+let dataAsli=[];
 let currentTanggal = "";
 
 // ======================================================
@@ -33,8 +34,28 @@ async function initDashboard(){
         .addEventListener("change", loadDashboard);
 
     document
-        .getElementById("search")
-        .addEventListener("keyup", filterNama);
+    .getElementById("search")
+    .addEventListener("input",prosesData);
+
+    document
+    .getElementById("filterGuru")
+    .onchange=prosesData;
+
+    document
+    .getElementById("filterKelas")
+    .onchange=prosesData;
+
+    document
+    .getElementById("filterTempat")
+    .onchange=prosesData;
+
+    document
+    .getElementById("filterStatus")
+    .onchange=prosesData;
+
+    document
+    .getElementById("sortData")
+    .onchange=prosesData;
 
     document
         .getElementById("btnLogout")
@@ -91,7 +112,11 @@ async function loadDashboard(){
 
         updateSummary(res.summary);
 
-        renderTable(res.rows);
+        dataAsli = res.rows;
+
+        isiSemuaFilter();
+
+        prosesData();
 
     }catch(err){
 
@@ -296,3 +321,198 @@ function hideLoading(){
         .style.display="none";
 
 }
+
+function isiSemuaFilter(){
+
+    isiFilter("filterGuru","guru");
+
+    isiFilter("filterKelas","kelas");
+
+    isiFilter("filterTempat","tempatPKL");
+
+}
+
+function isiFilter(id,field){
+
+    const select=document.getElementById(id);
+
+    const old=select.value;
+
+    select.innerHTML="<option value=''>Semua</option>";
+
+    const list=[
+
+        ...new Set(
+
+            dataAsli.map(x=>x[field])
+
+        )
+
+    ].sort();
+
+    list.forEach(v=>{
+
+        select.innerHTML+=
+
+        `<option>${v}</option>`;
+
+    });
+
+    select.value=old;
+
+}
+
+function prosesData(){
+
+    let hasil=[...dataAsli];
+
+    hasil=filterCari(hasil);
+
+    hasil=filterDropdown(hasil);
+
+    hasil=urutkan(hasil);
+
+    dataDashboard=hasil;
+
+    renderTable();
+
+}
+
+function filterCari(data){
+
+    const key=document
+    .getElementById("search")
+    .value
+    .trim()
+    .toLowerCase();
+
+    if(key=="") return data;
+
+    return data.filter(r=>
+
+        String(r.nis).toLowerCase().includes(key)
+
+        ||
+
+        r.nama.toLowerCase().includes(key)
+
+        ||
+
+        r.guru.toLowerCase().includes(key)
+
+        ||
+
+        r.kelas.toLowerCase().includes(key)
+
+        ||
+
+        r.tempatPKL.toLowerCase().includes(key)
+
+    );
+
+}
+
+function filterDropdown(data){
+
+    const guru=document.getElementById("filterGuru").value;
+
+    const kelas=document.getElementById("filterKelas").value;
+
+    const tempat=document.getElementById("filterTempat").value;
+
+    const status=document.getElementById("filterStatus").value;
+
+    return data.filter(r=>{
+
+        return (
+
+            (!guru || r.guru==guru)
+
+            &&
+
+            (!kelas || r.kelas==kelas)
+
+            &&
+
+            (!tempat || r.tempatPKL==tempat)
+
+            &&
+
+            (!status || r.status==status)
+
+        );
+
+    });
+
+}
+
+
+function urutkan(data){
+
+    const sort=document
+    .getElementById("sortData")
+    .value;
+
+    switch(sort){
+
+        case "namaAsc":
+
+            data.sort((a,b)=>a.nama.localeCompare(b.nama));
+
+            break;
+
+        case "namaDesc":
+
+            data.sort((a,b)=>b.nama.localeCompare(a.nama));
+
+            break;
+
+        case "guruAsc":
+
+            data.sort((a,b)=>a.guru.localeCompare(b.guru));
+
+            break;
+
+        case "guruDesc":
+
+            data.sort((a,b)=>b.guru.localeCompare(a.guru));
+
+            break;
+
+        case "kelasAsc":
+
+            data.sort((a,b)=>a.kelas.localeCompare(b.kelas));
+
+            break;
+
+        case "kelasDesc":
+
+            data.sort((a,b)=>b.kelas.localeCompare(a.kelas));
+
+            break;
+
+        case "tempatAsc":
+
+            data.sort((a,b)=>a.tempatPKL.localeCompare(b.tempatPKL));
+
+            break;
+
+        case "tempatDesc":
+
+            data.sort((a,b)=>b.tempatPKL.localeCompare(a.tempatPKL));
+
+            break;
+
+        case "statusAsc":
+
+            data.sort((a,b)=>a.status.localeCompare(b.status));
+
+            break;
+
+    }
+
+    return data;
+
+}
+
+

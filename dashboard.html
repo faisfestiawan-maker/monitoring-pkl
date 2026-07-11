@@ -137,25 +137,68 @@
 
         <section class="toolbar">
 
-            <div>
-
+            <div class="filter-item">
                 <label>Tanggal</label>
-
-                <input
-                    type="date"
-                    id="tanggal">
-
+                <input type="date" id="tanggal">
             </div>
 
-            <div>
-
-                <label>Cari Nama</label>
-
+            <div class="filter-item">
+                <label>Pencarian</label>
                 <input
                     type="text"
                     id="search"
-                    placeholder="Ketik nama siswa...">
+                    placeholder="Nama, NIS, Guru, Kelas, Tempat PKL">
+            </div>
 
+            <div class="filter-item">
+                <label>Guru</label>
+                <select id="filterGuru">
+                    <option value="">Semua Guru</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Kelas</label>
+                <select id="filterKelas">
+                    <option value="">Semua Kelas</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Tempat PKL</label>
+                <select id="filterTempat">
+                    <option value="">Semua Tempat</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Status</label>
+                <select id="filterStatus">
+                    <option value="">Semua</option>
+                    <option value="HADIR">HADIR</option>
+                    <option value="BELUM">BELUM</option>
+                </select>
+            </div>
+
+            <div class="filter-item">
+                <label>Urutkan</label>
+                <select id="sortData">
+
+                    <option value="namaAsc">Nama A-Z</option>
+                    <option value="namaDesc">Nama Z-A</option>
+
+                    <option value="guruAsc">Guru A-Z</option>
+                    <option value="guruDesc">Guru Z-A</option>
+
+                    <option value="kelasAsc">Kelas A-Z</option>
+                    <option value="kelasDesc">Kelas Z-A</option>
+
+                    <option value="tempatAsc">Tempat PKL A-Z</option>
+                    <option value="tempatDesc">Tempat PKL Z-A</option>
+
+                    <option value="statusAsc">Status</option>
+
+                </select>
             </div>
 
         </section>
