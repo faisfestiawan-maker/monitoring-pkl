@@ -259,28 +259,22 @@ async function lihatFoto(nis){
             currentTanggal
         );
 
-        console.log("HASIL API");
         console.log(res);
 
-        console.log("DATA");
-        console.log(res.data);
-
-        console.log("FOTO");
-        console.log(res.data?.foto);
-
         if(!res.success){
+
             alert(res.message);
             return;
+
         }
 
-        document.getElementById("previewFoto").src =
-            res.data.foto;
+        document.getElementById("previewFoto").src = res.foto;
 
-        document.getElementById("modal").style.display="flex";
+        document.getElementById("modal").style.display = "flex";
 
     }catch(err){
 
-        console.log(err);
+        alert(err.message);
 
     }
 
