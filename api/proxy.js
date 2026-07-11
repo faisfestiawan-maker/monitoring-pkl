@@ -1,86 +1,100 @@
-const https = require('https');
-const url = require('url');
+const https = require("https");
 
-// Google Apps Script endpoint
+// URL Web App Apps Script
 const GAS_URL = "https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
 
 module.exports = (req, res) => {
-  
-  // Enable CORS
-  res.setHeader('Access-Control-Allow-Origin', '*');
-  res.setHeader('Access-Control-Allow-Methods', 'POST, GET, OPTIONS');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  res.setHeader('Content-Type', 'application/json');
 
-  // Handle preflight
-  if (req.method === 'OPTIONS') {
-    res.status(200).end();
-    return;
-  }
+    // ============================
+    // CORS
+    // ============================
 
-  if (req.method !== 'POST' && req.method !== 'GET') {
-    res.status(405).json({ error: 'Method not allowed' });
-    return;
-  }
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
 
-  try {
-    
-    let gasUrl = GAS_URL;
-    let gasBody = null;
+    if (req.method === "OPTIONS") {
+        return res.status(200).end();
+    }
 
-    if(req.method!=="POST"){
+    if (req.method !== "POST") {
+        return res.status(405).json({
+            success: false,
+            message: "Method not allowed"
+        });
+    }
 
-        res.status(405).json({
+    // ============================
+    // BODY
+    // ============================
+
+    const body =
+        typeof req.body === "string"
+            ? req.body
+            : JSON.stringify(req.body || {});
+
+    // ============================
+    // REQUEST KE APPS SCRIPT
+    // ============================
+
+    const gasReq = https.request(
+        GAS_URL,
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Content-Length": Buffer.byteLength(body)
+            }
+        },
+        (gasRes) => {
+
+            let result = "";
+
+            gasRes.on("data", chunk => {
+                result += chunk;
+            });
+
+            gasRes.on("end", () => {
+
+                try{
+
+                    res.status(200).json(
+                        JSON.parse(result)
+                    );
+
+                }catch(err){
+
+                    res.status(500).json({
+
+                        success:false,
+
+                        message:"Response Apps Script tidak valid.",
+
+                        raw:result
+
+                    });
+
+                }
+
+            });
+
+        }
+    );
+
+    gasReq.on("error", err => {
+
+        res.status(500).json({
 
             success:false,
 
-            message:"Method not allowed"
+            message:err.message
 
         });
 
-        return;
-
-    } else {
-      // GET request - add query params
-      const query = new URLSearchParams(req.query);
-      gasUrl = GAS_URL + '?' + query.toString();
-    }
-
-    const options = {
-      method: req.method,
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-
-    const gasReq = https.request(gasUrl, options, (gasRes) => {
-      let data = '';
-
-      gasRes.on('data', (chunk) => {
-        data += chunk;
-      });
-
-      gasRes.on('end', () => {
-        try {
-          const result = JSON.parse(data);
-          res.status(200).json(result);
-        } catch (e) {
-          res.status(200).json({ success: false, message: 'Invalid response from server' });
-        }
-      });
     });
 
-    gasReq.on('error', (err) => {
-      res.status(500).json({ success: false, message: err.message });
-    });
-
-    if (gasBody) {
-      gasReq.write(gasBody);
-    }
+    gasReq.write(body);
 
     gasReq.end();
 
-  } catch (err) {
-    res.status(500).json({ success: false, message: err.message });
-  }
 };
