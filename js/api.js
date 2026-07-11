@@ -7,17 +7,28 @@ const API_URL =
 
 
 // ================================================
-// GET REQUEST
+// POST REQUEST
 // ================================================
 
-async function getAPI(params){
+async function callAPI(action, params={}){
 
     try{
 
-        const query = new URLSearchParams(params);
+        const payload = Object.assign(
+            { action: action },
+            params
+        );
 
         const response = await fetch(
-            API_URL + "?" + query.toString()
+            API_URL,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload),
+                mode: "cors"
+            }
         );
 
         if(!response.ok){
@@ -30,15 +41,57 @@ async function getAPI(params){
 
         const result = await response.json();
 
-        console.log("API RESULT :", result);
+        return result;
+
+    }catch(err){
+
+        console.error("API Error:", err);
+
+        throw new Error(
+            err.message || "Gagal terhubung ke server"
+        );
+
+    }
+
+}
+
+
+// ================================================
+// GET REQUEST (LEGACY)
+// ================================================
+
+async function getAPI(params){
+
+    try{
+
+        const query = new URLSearchParams(params);
+
+        const response = await fetch(
+            API_URL + "?" + query.toString(),
+            {
+                mode: "cors"
+            }
+        );
+
+        if(!response.ok){
+
+            throw new Error(
+                "HTTP Error : " + response.status
+            );
+
+        }
+
+        const result = await response.json();
 
         return result;
 
     }catch(err){
 
-        console.error(err);
+        console.error("API Error:", err);
 
-        throw err;
+        throw new Error(
+            err.message || "Gagal terhubung ke server"
+        );
 
     }
 
@@ -51,13 +104,7 @@ async function getAPI(params){
 
 async function loginGuru(email){
 
-    return await getAPI({
-
-        action:"loginGuru",
-
-        email:email
-
-    });
+    return await callAPI("loginGuru", { email });
 
 }
 
@@ -68,13 +115,7 @@ async function loginGuru(email){
 
 async function loginOrtu(nis){
 
-    return await getAPI({
-
-        action:"loginOrtu",
-
-        nis:nis
-
-    });
+    return await callAPI("loginOrtu", { nis });
 
 }
 
@@ -85,18 +126,11 @@ async function loginOrtu(nis){
 
 async function getDashboard(user,tanggal){
 
-    return await getAPI({
-
-        action:"dashboard",
-
-        tanggal:tanggal,
-
-        role:user.role,
-
-        nama:user.nama || "",
-
-        nis:user.nis || ""
-
+    return await callAPI("dashboard", {
+        tanggal,
+        role: user.role,
+        nama: user.nama || "",
+        nis: user.nis || ""
     });
 
 }
@@ -108,20 +142,12 @@ async function getDashboard(user,tanggal){
 
 async function getRiwayat(user,tanggalAwal,tanggalAkhir){
 
-    return await getAPI({
-
-        action:"riwayat",
-
-        tanggalAwal:tanggalAwal,
-
-        tanggalAkhir:tanggalAkhir,
-
-        role:user.role,
-
-        nama:user.nama || "",
-
-        nis:user.nis || ""
-
+    return await callAPI("riwayat", {
+        tanggalAwal,
+        tanggalAkhir,
+        role: user.role,
+        nama: user.nama || "",
+        nis: user.nis || ""
     });
 
 }
@@ -133,14 +159,6 @@ async function getRiwayat(user,tanggalAwal,tanggalAkhir){
 
 async function getDetail(nis,tanggal){
 
-    return await getAPI({
-
-        action:"detail",
-
-        nis:nis,
-
-        tanggal:tanggal
-
-    });
+    return await callAPI("detail", { nis, tanggal });
 
 }
