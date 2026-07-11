@@ -19,6 +19,8 @@ module.exports = async (req, res) => {
     }
 
     try {
+        console.log("=== REQUEST BODY ===");
+        console.log(req.body);
 
         const response = await fetch(GAS_URL, {
 
@@ -35,7 +37,8 @@ module.exports = async (req, res) => {
         });
 
         const text = await response.text();
-
+        console.log("=== RESPONSE GAS ===");
+        console.log(text);
         try{
 
             return res.status(200).json(
