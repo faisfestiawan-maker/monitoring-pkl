@@ -1,0 +1,13 @@
+{
+  "name": "monitoring-pkl-proxy",
+  "version": "1.0.0",
+  "description": "CORS proxy for monitoring PKL",
+  "main": "api/proxy.js",
+  "scripts": {
+    "test": "node api/proxy.js"
+  },
+  "dependencies": {},
+  "engines": {
+    "node": "18.x"
+  }
+}

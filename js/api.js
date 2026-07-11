@@ -2,8 +2,8 @@
 // API CONFIGURATION
 // ================================================
 
-const API_URL =
-"https://script.google.com/macros/s/AKfycbyVz29d1-JQuyiXpFI-9xmOtg9M7Yi8aRGL8Hyy_VPuTP4JJG0Oitl_b4w3X0TiCeYu/exec";
+// See js/config.js untuk setup API URL yang sesuai
+// API_URL akan diimport dari config.js
 
 
 // ================================================
