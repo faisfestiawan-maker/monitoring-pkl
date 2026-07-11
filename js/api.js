@@ -124,21 +124,15 @@ async function loginOrtu(nis){
 // DASHBOARD
 // ================================================
 
-async function getDashboard(user,tanggal){
+async function getDashboard(user, tanggal){
 
-    return await callAPI(
+    return await callAPI("dashboard", {
 
-        "dashboard",
+        user: user,
 
-        {
+        tanggal: tanggal
 
-            user:user,
-
-            tanggal:tanggal
-
-        }
-
-    );
+    });
 
 }
 
@@ -147,31 +141,17 @@ async function getDashboard(user,tanggal){
 // RIWAYAT
 // ================================================
 
-async function getRiwayat(
+async function getRiwayat(user, tanggalAwal, tanggalAkhir){
 
-    user,
+    return await callAPI("riwayat", {
 
-    tanggalAwal,
+        user: user,
 
-    tanggalAkhir
+        tanggalAwal: tanggalAwal,
 
-){
+        tanggalAkhir: tanggalAkhir
 
-    return await callAPI(
-
-        "riwayat",
-
-        {
-
-            user:user,
-
-            tanggalAwal:tanggalAwal,
-
-            tanggalAkhir:tanggalAkhir
-
-        }
-
-    );
+    });
 
 }
 

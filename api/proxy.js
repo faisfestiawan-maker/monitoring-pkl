@@ -58,16 +58,15 @@ module.exports = async (req, res) => {
 
         const text = await response.text();
 
+        console.log("STATUS :", response.status);
+        console.log("TEXT :", text);
+
+        return res.status(200).send(text);
+
         console.log("===== RESPONSE GAS =====");
         console.log(text);
 
-        try{
-
-            const json = JSON.parse(text);
-
-            return res.status(200).json(json);
-
-        }catch(err){
+        catch(err){
 
             return res.status(500).json({
 
