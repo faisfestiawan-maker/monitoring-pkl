@@ -33,17 +33,11 @@ async function initDashboard(){
         .getElementById("tanggal")
         .addEventListener("change", loadDashboard);
 
-    document
-    .getElementById("search")
-    .addEventListener("input",prosesData);
+    document.getElementById("search").oninput = prosesData;
 
-    document
-    .getElementById("filterStatus")
-    .onchange=prosesData;
+    document.getElementById("filterStatus").onchange = prosesData;
 
-    document
-    .getElementById("sortData")
-    .onchange=prosesData;
+    document.getElementById("sortData").onchange = prosesData;
 
     document
         .getElementById("btnLogout")
