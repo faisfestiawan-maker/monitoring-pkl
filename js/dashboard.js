@@ -234,31 +234,35 @@ async function lihatFoto(nis){
 
     try{
 
-        const res = await getDetail(
-            nis,
-            currentTanggal
-        );
+        console.log("Klik tombol lihat");
+
+        const res = await getDetail(nis,currentTanggal);
 
         console.log(res);
 
         if(!res.success){
-
             alert(res.message);
             return;
-
         }
 
         const urlFoto = convertDriveLink(res.foto);
 
-        console.log("URL Foto :", urlFoto);
+        console.log(urlFoto);
 
-        document.getElementById("previewFoto").src = urlFoto;
+        const modal=document.getElementById("modal");
+        const img=document.getElementById("previewFoto");
 
-        document.getElementById("modal").style.display = "flex";
+        img.src=urlFoto;
+
+        console.log("Sebelum :",modal.style.display);
+
+        modal.style.display="flex";
+
+        console.log("Sesudah :",modal.style.display);
 
     }catch(err){
 
-        alert(err.message);
+        console.error(err);
 
     }
 
