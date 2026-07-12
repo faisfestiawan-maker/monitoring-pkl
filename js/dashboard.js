@@ -116,15 +116,15 @@ function updateSummary(summary){
 
     document.getElementById("total").textContent = summary.total;
 
-    document.getElementById("hadir").textContent = summary.hadir;
+    document.getElementById("hadir").textContent = summary.presensi;
 
     document.getElementById("belum").textContent = summary.belum;
 
     if(document.getElementById("persen")){
 
         const p = summary.total === 0
-            ? 0
-            : Math.round(summary.hadir * 100 / summary.total);
+        ? 0
+        : Math.round(summary.presensi * 100 / summary.total);
 
         document.getElementById("persen").textContent = p + "%";
 
