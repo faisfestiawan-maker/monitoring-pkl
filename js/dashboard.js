@@ -268,7 +268,11 @@ async function lihatFoto(nis){
 
         }
 
-        document.getElementById("previewFoto").src = res.foto;
+        const urlFoto = convertDriveLink(res.foto);
+
+        console.log("URL Foto :", urlFoto);
+
+        document.getElementById("previewFoto").src = urlFoto;
 
         document.getElementById("modal").style.display = "flex";
 
@@ -285,6 +289,19 @@ function closeModal(){
     document
         .getElementById("modal")
         .style.display = "none";
+
+}
+
+
+function convertDriveLink(url){
+
+    if(!url) return "";
+
+    const match = url.match(/\/d\/([^\/]+)\//);
+
+    if(!match) return url;
+
+    return "https://drive.google.com/uc?export=view&id=" + match[1];
 
 }
 
