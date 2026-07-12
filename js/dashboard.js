@@ -276,16 +276,17 @@ function closeModal(){
 
 }
 
-
 function convertDriveLink(url){
 
     if(!url) return "";
 
-    const match = url.match(/\/d\/([^\/]+)\//);
+    const match = url.match(/\/d\/([^\/]+)/);
 
-    if(!match) return url;
+    if(!match) return "";
 
-    return "https://drive.google.com/uc?export=view&id=" + match[1];
+    return "https://drive.google.com/thumbnail?id="
+        + match[1]
+        + "&sz=w1200";
 
 }
 
