@@ -142,14 +142,13 @@ function renderTable(){
 
     tbody.innerHTML = "";
 
-    dataDashboard.forEach((item,index)=>{
+dataDashboard.forEach((item,index)=>{
 
-        const statusClass =
-            item.status==="HADIR"
-            ? "hadir"
-            : "belum";
+    const statusClass = (item.status || "belum")
+        .toLowerCase()
+        .replace(/\s+/g,"");
 
-        tbody.innerHTML += `
+    tbody.innerHTML += `
 
 <tr>
 
