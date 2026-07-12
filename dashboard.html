@@ -137,33 +137,39 @@
 
         <section class="toolbar">
 
-            <div>
-                <label>Tanggal</label>
+            <div class="toolbar-item">
+                <label for="tanggal">Tanggal</label>
                 <input
+                    class="toolbar-control"
                     type="date"
                     id="tanggal">
             </div>
 
-            <div>
-                <label>Pencarian</label>
+            <div class="toolbar-item">
+                <label for="search">Pencarian</label>
                 <input
+                    class="toolbar-control"
                     type="text"
                     id="search"
                     placeholder="Nama, NIS, Guru, Kelas, Tempat PKL">
             </div>
 
-            <div>
-                <label>Status</label>
-                <select id="filterStatus">
+            <div class="toolbar-item">
+                <label for="filterStatus">Status</label>
+                <select
+                    class="toolbar-control"
+                    id="filterStatus">
                     <option value="">Semua</option>
                     <option value="HADIR">Hadir</option>
                     <option value="BELUM">Belum</option>
                 </select>
             </div>
 
-            <div>
-                <label>Urutkan</label>
-                <select id="sortBy">
+            <div class="toolbar-item">
+                <label for="sortBy">Urutkan</label>
+                <select
+                    class="toolbar-control"
+                    id="sortBy">
                     <option value="namaAsc">Nama A-Z</option>
                     <option value="namaDesc">Nama Z-A</option>
                     <option value="guruAsc">Guru A-Z</option>

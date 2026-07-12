@@ -37,7 +37,7 @@ async function initDashboard(){
 
     document.getElementById("filterStatus").onchange = prosesData;
 
-    document.getElementById("sortData").onchange = prosesData;
+    document.getElementById("sortBy").onchange = prosesData;
 
     document
         .getElementById("btnLogout")
@@ -384,9 +384,7 @@ function filterStatus(data){
 
 function urutkan(data){
 
-    const sort=document
-    .getElementById("sortData")
-    .value;
+    const sort = document.getElementById("sortBy").value;
 
     switch(sort){
 
