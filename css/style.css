@@ -734,48 +734,72 @@ tbody tr:hover{
    MODAL
 ===================================================== */
 
+/* =========================
+   MODAL FOTO
+========================= */
+
 .modal{
-
     display:none;
-
     position:fixed;
-
     inset:0;
-
-    background:rgba(0,0,0,.6);
+    background:rgba(0,0,0,.75);
 
     justify-content:center;
-
     align-items:center;
 
     z-index:9999;
-
 }
 
 .modal-content{
 
-    background:white;
-
-    padding:20px;
-
-    border-radius:15px;
-
     position:relative;
 
-    max-width:90%;
+    background:#fff;
 
-    max-height:90%;
+    padding:15px;
 
+    border-radius:12px;
+
+    max-width:90vw;
+    max-height:90vh;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    overflow:auto;
 }
 
 #previewFoto{
 
-    max-width:700px;
+    display:block;
 
-    width:100%;
+    max-width:85vw;
+    max-height:85vh;
+
+    width:auto;
+    height:auto;
+
+    object-fit:contain;
 
     border-radius:10px;
+}
 
+#closeModal{
+
+    position:absolute;
+
+    top:8px;
+    right:12px;
+
+    font-size:36px;
+    font-weight:bold;
+
+    cursor:pointer;
+
+    color:#444;
+
+    z-index:10;
 }
 
 #closeModal{
