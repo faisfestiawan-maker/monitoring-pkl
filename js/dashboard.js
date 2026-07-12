@@ -38,18 +38,6 @@ async function initDashboard(){
     .addEventListener("input",prosesData);
 
     document
-    .getElementById("filterGuru")
-    .onchange=prosesData;
-
-    document
-    .getElementById("filterKelas")
-    .onchange=prosesData;
-
-    document
-    .getElementById("filterTempat")
-    .onchange=prosesData;
-
-    document
     .getElementById("filterStatus")
     .onchange=prosesData;
 
@@ -113,8 +101,6 @@ async function loadDashboard(){
         updateSummary(res.summary);
 
         dataAsli = res.rows;
-
-        isiSemuaFilter();
 
         prosesData();
 
@@ -337,45 +323,6 @@ function hideLoading(){
 
 }
 
-function isiSemuaFilter(){
-
-    isiFilter("filterGuru","guru");
-
-    isiFilter("filterKelas","kelas");
-
-    isiFilter("filterTempat","tempatPKL");
-
-}
-
-function isiFilter(id,field){
-
-    const select=document.getElementById(id);
-
-    const old=select.value;
-
-    select.innerHTML="<option value=''>Semua</option>";
-
-    const list=[
-
-        ...new Set(
-
-            dataAsli.map(x=>x[field])
-
-        )
-
-    ].sort();
-
-    list.forEach(v=>{
-
-        select.innerHTML+=
-
-        `<option>${v}</option>`;
-
-    });
-
-    select.value=old;
-
-}
 
 function prosesData(){
 
@@ -383,13 +330,13 @@ function prosesData(){
 
     hasil=filterCari(hasil);
 
-    hasil=filterDropdown(hasil);
+    hasil=filterStatus(hasil);
 
     hasil=urutkan(hasil);
 
     dataDashboard=hasil;
 
-    renderTable();
+    renderTable(dataDashboard);
 
 }
 
@@ -427,37 +374,16 @@ function filterCari(data){
 
 }
 
-function filterDropdown(data){
+function filterStatus(data){
 
-    const guru=document.getElementById("filterGuru").value;
+    const status=document
+        .getElementById("filterStatus")
+        .value;
 
-    const kelas=document.getElementById("filterKelas").value;
+    if(status==="")
+        return data;
 
-    const tempat=document.getElementById("filterTempat").value;
-
-    const status=document.getElementById("filterStatus").value;
-
-    return data.filter(r=>{
-
-        return (
-
-            (!guru || r.guru==guru)
-
-            &&
-
-            (!kelas || r.kelas==kelas)
-
-            &&
-
-            (!tempat || r.tempatPKL==tempat)
-
-            &&
-
-            (!status || r.status==status)
-
-        );
-
-    });
+    return data.filter(r=>r.status===status);
 
 }
 
