@@ -142,12 +142,9 @@ async function lihatFoto(nis, tanggal){
 
     try{
 
-        const res = await getDetail(
-            nis,
-            tanggal
-        );
+        const res = await getDetail(nis, tanggal);
 
-        console.log(res);
+        console.log("DETAIL:", res);
 
         if(!res.success){
 
@@ -156,21 +153,11 @@ async function lihatFoto(nis, tanggal){
 
         }
 
-        if(!res.foto){
-
-            alert("Foto tidak ditemukan");
-            return;
-
-        }
-
-        document.getElementById("previewFoto").src =
-            convertDriveLink(res.foto);
-
-        document.getElementById("modal").style.display =
-            "flex";
+        alert(JSON.stringify(res));
 
     }catch(err){
 
+        console.error(err);
         alert(err.message);
 
     }
