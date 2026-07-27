@@ -142,7 +142,12 @@ async function lihatFoto(nis, tanggal){
 
     try{
 
-        const res = await getDetail(nis, tanggal);
+        const res = await getDetail(
+            nis,
+            tanggal
+        );
+
+        console.log(res);
 
         if(!res.success){
 
@@ -151,9 +156,18 @@ async function lihatFoto(nis, tanggal){
 
         }
 
-        document.getElementById("previewFoto").src = res.data.foto;
+        if(!res.foto){
 
-        document.getElementById("modal").style.display = "flex";
+            alert("Foto tidak ditemukan");
+            return;
+
+        }
+
+        document.getElementById("previewFoto").src =
+            convertDriveLink(res.foto);
+
+        document.getElementById("modal").style.display =
+            "flex";
 
     }catch(err){
 
@@ -194,5 +208,18 @@ function showLoading(){
 function hideLoading(){
 
     document.getElementById("loading").style.display="none";
+
+}
+
+
+function convertDriveLink(url){
+
+    if(!url) return "";
+
+    const match = url.match(/\/d\/([^\/]+)/);
+
+    if(!match) return url;
+
+    return `https://drive.google.com/thumbnail?id=${match[1]}&sz=w1200`;
 
 }
