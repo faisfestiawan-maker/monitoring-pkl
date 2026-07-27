@@ -142,9 +142,11 @@ async function lihatFoto(nis, tanggal){
 
     try{
 
+        console.log("Klik tombol lihat");
+
         const res = await getDetail(nis, tanggal);
 
-        console.log("DETAIL:", res);
+        console.log(res);
 
         if(!res.success){
 
@@ -153,12 +155,23 @@ async function lihatFoto(nis, tanggal){
 
         }
 
-        alert(JSON.stringify(res));
+        const urlFoto = convertDriveLink(res.foto);
+
+        console.log(urlFoto);
+
+        const modal =
+            document.getElementById("modal");
+
+        const img =
+            document.getElementById("previewFoto");
+
+        img.src = urlFoto;
+
+        modal.style.display = "flex";
 
     }catch(err){
 
         console.error(err);
-        alert(err.message);
 
     }
 
@@ -203,7 +216,8 @@ function convertDriveLink(url){
 
     if(!url) return "";
 
-    const match = url.match(/\/d\/([^\/]+)/);
+    const match =
+        url.match(/\/d\/([^\/]+)/);
 
     if(!match) return url;
 
